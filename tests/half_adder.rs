@@ -11,3 +11,17 @@ pub fn half_adder_input_output() -> Vec<((u8, u8), (Sum, Carry))> {
         ((1, 1), (0, 1)),
     ]
 }
+
+/// This function implements a half_adder, using primitive gates
+fn half_adder(a: u8, b: u8) -> (Sum, Carry) {
+    (xor(a, b), and(a, b))
+}
+
+#[test]
+fn one_bit_adder() {
+    for (inn, out) in half_adder_input_output() {
+        let (a, b) = inn;
+        println!("Testing {}, {} -> {:?}:", a, b, out);
+        assert_eq!(half_adder(a, b), out);
+    }
+}
